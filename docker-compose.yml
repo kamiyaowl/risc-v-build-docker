@@ -1,0 +1,9 @@
+version: "3"
+services:
+  riscv_env:
+    build:
+      context: .
+      dockerfile: ./riscv_env.Dockerfile
+    volumes:
+      - ./riscv_env/work:/work
+      - ./riscv_env/tools:/opt/riscv
