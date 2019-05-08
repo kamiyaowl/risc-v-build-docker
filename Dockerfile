@@ -14,12 +14,11 @@ RUN git clone --recursive https://github.com/riscv/riscv-gnu-toolchain
 RUN cd riscv-gnu-toolchain && ./configure && make
 
 # Install Chisel
-COPY --from=riscv-toolchain / /
 RUN apt install -y default-jdk
 RUN echo "deb https://dl.bintray.com/sbt/debian /" | sudo tee -a /etc/apt/sources.list.d/sbt.list
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 642AC823
 RUN apt update
-RUN apt install sbt
+RUN apt install -y sbt
 
 # Install Verilator
 RUN apt install -y git make g++
