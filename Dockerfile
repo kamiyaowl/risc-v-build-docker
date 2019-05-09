@@ -25,9 +25,8 @@ WORKDIR /work/rocker-chip
 
 RUN git clone https://github.com/ucb-bar/rocket-chip.git
 RUN cd rocket-chip && git submodule update --init
-RUN apt install -y device-tree-compiler  python3.7
-RUN echo 'alias python=/usr/bin/python3.7' >> ~/.bashrc
-RUN source ~/.bashrc
+RUN apt install -y device-tree-compiler python3-pip python3-dev
+RUN cd /usr/local/bin && ln -s /usr/bin/python3 python && pip3 install --upgrade pip
 RUN python --version
 RUN cd rocket-chip/vsim && make verilog
 
