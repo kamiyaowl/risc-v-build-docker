@@ -15,24 +15,17 @@ RUN cd riscv-gnu-toolchain && ./configure && make
 
 # Install Chisel
 RUN apt install -y default-jdk
-RUN echo "deb https://dl.bintray.com/sbt/debian /" | sudo tee -a /etc/apt/sources.list.d/sbt.list
+RUN echo "deb https://dl.bintray.com/sbt/debian /" | tee -a /etc/apt/sources.list.d/sbt.list
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 642AC823
 RUN apt update
 RUN apt install -y sbt
-
-# Install Verilator
-RUN apt install -y git make g++
-RUN git clone http://git.veripool.org/git/verilator
-RUN cd verilator && git pull && git checkout verilator_4_006
-RUN cd verilator && autoconf && ./configure && make && make install
-
 
 # Run Rocket Chip Generator
 WORKDIR /work/rocker-chip
 
 RUN git clone https://github.com/ucb-bar/rocket-chip.git
 RUN cd rocket-chip && git submodule update --init
-RUN cd rocker-chip/vsim && make verilog
+RUN cd rocket-chip/vsim && make verilog
 
 
 # Run RISC-V BOOM
