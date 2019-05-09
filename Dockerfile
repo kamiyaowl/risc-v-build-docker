@@ -25,8 +25,10 @@ WORKDIR /work/rocker-chip
 
 RUN git clone https://github.com/ucb-bar/rocket-chip.git
 RUN cd rocket-chip && git submodule update --init
+RUN apt install -y device-tree-compiler  python3.7
+RUN alias python=/usr/bin/python3.7
+RUN python --version
 RUN cd rocket-chip/vsim && make verilog
-
 
 # Run RISC-V BOOM
 WORKDIR /work/riscv-boom

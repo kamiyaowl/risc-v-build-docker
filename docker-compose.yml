@@ -5,5 +5,5 @@ services:
       context: .
       dockerfile: ./Dockerfile
     volumes:
-      - ./riscv_env/work:/work
-      - ./riscv_env/tools:/opt/riscv
+      - ./dst:/dst
+    command: cp -r /work /dst/work && cp -r /opt/riscv /dst/riscv
